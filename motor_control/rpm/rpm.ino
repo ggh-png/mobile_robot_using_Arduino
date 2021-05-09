@@ -65,7 +65,7 @@ void RPM(){
 
 void T5ISR(){
   t5_flag = true;
-  RPM();   
+  
 }
 
 
