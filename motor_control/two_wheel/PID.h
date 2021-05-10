@@ -115,7 +115,7 @@ float speed_2 = 0;
 
 void messageCb(const robot_msgs::Motor& msg){
   speed_1 = msg.left_motor.data;
-  speed_2 = msg.right_motor.data;
+  speed_2 = msg.right_motor.data; 
 }
 
 // ========================================================================//
@@ -161,10 +161,10 @@ void M1vel_PID(float m1_ref_spd){
   m1_ctrl_u = M1PID_val;
   // 속도 오차가 생기면  
   M1doMotor(m1_ctrl_u >= 0 ? HIGH : LOW, m1_ctrl_u);
-  Serial.print("m1 speed : ");
+  //Serial.print("m1 speed : ");
   //Serial.println(m1_ref_spd);
-  Serial.print(m1_speed);
-  Serial.print(" | ");  
+  //Serial.print(m1_speed);
+  //Serial.print(" | ");  
 }
 
 
@@ -181,8 +181,8 @@ void M2vel_PID(float m2_ref_spd){
   m2_ctrl_u = M2PID_val;
   // 속도 오차가 생기면  
   M2doMotor(m2_ctrl_u >= 0 ? HIGH : LOW, m2_ctrl_u);
-  Serial.print("m2 speed : ");
-  Serial.println(m2_speed);
+  //Serial.print("m2 speed : ");
+  //Serial.println(m2_speed);
 }
 
 void RPM(){
@@ -228,7 +228,7 @@ void M2doMotor(bool dir, long vel){
 
 void T5ISR(){
   t5_flag = true; // dir 토글
-  RPM();
+  //RPM();
   M1vel_PID(speed_1);
   M2vel_PID(speed_2);   
 }
