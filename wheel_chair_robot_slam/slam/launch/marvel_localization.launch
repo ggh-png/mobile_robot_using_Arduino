@@ -1,0 +1,13 @@
+<launch>
+  <include file="$(find marvel_slam)/launch/marvel_configuration.launch"/>
+
+	<!-- Run the map server --> 
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find marvel_slam)/map/test112.yaml"/>
+
+  <!--- Run AMCL --> 
+  <include file="$(find marvelbot_2dnav)/launch/amcl.launch"/>
+
+  <!-- rviz -->
+  <node pkg="rviz" type="rviz" name="rviz" args = "-d $(find marvel_slam)/rviz/amcl.rviz" />
+
+</launch>

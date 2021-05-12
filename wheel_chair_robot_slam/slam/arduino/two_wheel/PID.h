@@ -1,3 +1,4 @@
+
 #include <TimerFive.h>
 
 #define rotation 3960
@@ -107,7 +108,7 @@ ros::NodeHandle  nh;
 robot_msgs::Motor sp_msg;
 ros::Publisher pub("/Motor/speed", &sp_msg);
 
-ros::Subscriber<robot_msgs::Motor> sub("/Wheel_chair_robot/speed_set", &messageCb );
+ros::Subscriber<robot_msgs::Motor> sub("/Motor/speed_set", &messageCb );
 
 float speed_1 = 0;
 float speed_2 = 0;
