@@ -1,0 +1,13 @@
+# the navigation stack uses two costmap to store information about obstacles
+# global costmap -> global planning
+# local costmap -> local planning and obstacle avoidance
+
+
+global_costmap:
+  global_frame: map
+  robot_base_frame: base_footprint
+  update_frequency: 3.0 # HZ 
+  static_map: true # the costmap initialize itself based on by the map_server. U have to have an existing map
+  plugins:
+    - {name: static_layer,   type: "costmap_2d::StaticLayer" }
+    - {name: inflation_layer,         type: "costmap_2d::InflationLayer"}

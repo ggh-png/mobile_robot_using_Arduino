@@ -113,8 +113,8 @@ float speed_1 = 0;
 float speed_2 = 0;
 
 void messageCb(const robot_msgs::Motor& msg){
-  speed_1 = msg.left_motor.data;
-  speed_2 = msg.right_motor.data; 
+  speed_2 = msg.left_motor.data;
+  speed_1 = msg.right_motor.data; 
 }
 
 // ========================================================================//
@@ -137,11 +137,12 @@ void setting(){
   attachInterrupt(digitalPinToInterrupt(ENC2_CHA), Enc2chA_ISR, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENC1_CHB), Enc1chB_ISR, CHANGE);
   attachInterrupt(digitalPinToInterrupt(ENC2_CHB), Enc2chB_ISR, CHANGE);  
-  Serial.begin(57600);
+  Serial.begin(115200);
   Timer5.initialize(10000); //10msec,
   Timer5.attachInterrupt(T5ISR); //T5ISR
   // ROS 통신 
-  nh.initNode();
+  nh.getHardware()->setBaud(115200);
+  nh.initNode(); 
   nh.subscribe(sub);
   nh.advertise(pub);
 }

@@ -1,0 +1,6 @@
+Max/min  velocity  and  acceleration  are  two  basic  parameters  for  the  mobile  base.Setting  them  correctly  is  very  helpful  for  optimal  local  planner  behavior
+In  ROS navigation, we need to know translational and rotational velocity and acceleration.
+
+Translational velocity(m/s) is the velocity when robot is moving in a straight line
+Rotationalvelocity(rad/s) is equivalent as angular velocity.
+For safety, we prefer to set maximum translational and rotational velocities to belower than their actual maximum values

@@ -1,0 +1,48 @@
+
+# robot Appearance
+#footprint: [[-0.205,-0.145], [-0.205,0.145],[0.077,0.145],[0.077,-0.145]]
+robot_radius: 0.24
+#footprint: [[-0.15,-0.15], [-0.15,0.15],[0.15,0.15],[0.15,-0.15]]
+#footprint: [[-0.15,-0.8], [-0.15,0.8],[0.15,0.8],[0.15,-0.8]]
+#footprint: [[-0.4,-0.15], [-0.4,0.15],[0.4,0.15],[0.4,-0.15]]
+map_type: costmap
+#  defines a list of sensors. the costmap built by passing this information
+#observation_sources: laser_scan_sensor #point_cloud_sensor
+#laser_scan_sensor: {sensor_frame: base_scan, data_type: LaserScan, topic: scan , marking: true, clearing: true} #marking ,clearing related obstacle 
+
+#point_cloud_sensor: {sensor_frame: frame_name, data_type: PointCloud, topic: topic_name, marking: true, clearing: true}
+static_layer: #http://wiki.ros.org/costmap_2d/hydro/staticmap
+  enabled: true
+  #If true, unknown values in the map messages are translated directly to the layer. Otherwise, unknown values in the map message are translated as FREE_SPACE in the layer. 
+  track_unknown_space: true
+  unknown_cost_value: -1
+
+
+inflation_layer: # http://wiki.ros.org/costmap_2d/hydro/inflation
+# exp(-1.0 * cost_scaling_factor * (distance_from_obstacle - inscribed_radius)) * (costmap_2d::INSCRIBED_INFLATED_OBSTACLE - 1), 
+# increasing cost_scaling_factor will decrease the resulting cost values. 
+  enabled: true
+  cost_scaling_factor: 2.6 # default
+  inflation_radius: 2 # the radius in meters
+
+obstacle_layer: #http://wiki.ros.org/costmap_2d/hydro/obstacles
+  enabled: true
+  observation_sources: laser_scan_sensor #point_cloud_sensor
+  laser_scan_sensor: 
+    sensor_frame: base_scan
+    data_type: LaserScan
+    topic: scan 
+    marking: true
+    clearing: true #marking ,clearing related obstacle 
+    # The maximum range in meters at which to insert obstacles into the costmap using sensor data. 
+    # if out of range value from sensor data , obstacles not marked.
+    obstacle_range: 3.5
+    # The maximum range in meters at which to raytrace out obstacles from the map using sensor data. 
+    # out of raytrace_range -> processed free space
+    raytrace_range: 3
+    # Allows for Inf values in "LaserScan" observation messages. The Inf values are converted to the laser maximum range. 
+    inf_is_valid: true
+    #If false, each pixel has one of 2 states: lethal obstacle or free. If true, each pixel has one of 3 states: lethal obstacle, free, or unknown. 
+    track_unknown_space: false
+    # Changes the behaviour how the obstacle_layer handles incoming data from layers 
+    combination_method: 1

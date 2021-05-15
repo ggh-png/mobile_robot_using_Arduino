@@ -1,0 +1,29 @@
+# https://wiki.ros.org/global_planner
+GlobalPlanner:
+  use_grid_path: false #If true, create a path that follows the grid boundarie
+  use_quadratic: true #If true, use the quadratic approximation of the potential. Otherwise, use a simpler calculation. 
+  use_dijkstra: true   # If true, use dijkstra's algorithm. Otherwise, A*. 
+  old_navfn_behavior: false # If for some reason, you want global_planner to exactly mirror the behavior of navfn, set this to true (and use the defaults for the other boolean parameters) 
+
+  # Specifies whether or not to allow the planner to create plans that traverse unknown space.
+  allow_unknown: false #NOTE: if you are using a layered costmap_2d costmap with a voxel or obstacle layer, you must also set the track_unknown_space param for that layer to be true, or it will convert all your unknown space to free space (which planner will then happily go right through). 
+
+  # true is  helpful  when we would  like  to visualize the potential map in RVIZ.
+  visualize_potential: false #Specifies whether or not to visualize the potential area 
+
+  # A tolerance on the goal point for the planner. 
+  # The planner will attempt to create a plan that is as close to the specified goal as possible but no further than default_tolerance away. 
+  default_tolerance: 0.0
+
+
+  orientation_mode: 0 # Forward is likely to not bad
+  # None=0 (No orientations added except goal orientation) 
+  # Forward=1 (Positive x axis points along path, except for the goal orientation) 
+  # Backward=4 (Negative x axis points along the path, except for the goal orientation) 
+  # Leftward=5 (Positive y axis points along the path, except for the goal orientation) 
+  # Rightward=6 (Negative y axis points along the path, except for the goal orientation) 
+  
+  # cost = neutral_cost + cost_factor * costmapcostvalue.
+  lethal_cost: 253
+  neutral_cost: 66
+  cost_factor: 0.55
