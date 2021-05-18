@@ -55,7 +55,7 @@
     </collision>
   </link>
   <link
-    name="imu_link">
+    name="imu_base">
     <inertial>
       <origin
         xyz="-9.3585E-18 0 0.000865"
@@ -103,7 +103,7 @@
     <parent
       link="base_link" />
     <child
-      link="imu_link" />
+      link="imu_base" />
     <axis
       xyz="0 0 0" />
   </joint>

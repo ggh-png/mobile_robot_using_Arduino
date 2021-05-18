@@ -22,6 +22,6 @@
     name="rviz"
     pkg="rviz"
     type="rviz"
-    args="-d $(find navigation)/rviz/navi.rviz" />
+    args="-d $(find navigation)/rviz/turtlebot3_navigation.rviz" />
 
 </launch>

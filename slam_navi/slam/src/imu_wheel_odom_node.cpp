@@ -47,10 +47,10 @@ void imu_Info(const sensor_msgs::Imu &msg){
 int main(int argc, char **argv){
     ros::init(argc, argv, "imu_wheel_odom_node");
     ros::NodeHandle n;
-    ros::Subscriber wheel_sub = n.subscribe("marvel/cmd_vel", 10, wheel_Info);
+    ros::Subscriber wheel_sub = n.subscribe("Wheel_chair_robot/cmd_vel", 10, wheel_Info);
     ros::Subscriber imu_sub = n.subscribe("imu/data", 10, imu_Info);
     tf2_ros::TransformBroadcaster br;
-    ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("marvel/odom", 10);
+    ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("wheel_chair_robot/odom", 10);
     ros::Time current_time, last_time;
     current_time = ros::Time::now();
     last_time = ros::Time::now();
