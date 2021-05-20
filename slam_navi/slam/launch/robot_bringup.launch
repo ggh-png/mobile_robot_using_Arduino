@@ -7,7 +7,7 @@
     <param name="port" value="$(arg motor_port)"/>
     <param name="baud" value="57600"/>
   </node> -->
-	<include file = "$(find wheel_chair_robot)/launch/display.launch"/>
+	<include file = "$(find description)/launch/display.launch"/>
 
 
    <node pkg="motor_ctrl" type="motor_ctrl_node" name="motor_ctrl_node"/>

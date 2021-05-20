@@ -1,94 +1,24 @@
 <launch>
-	<!-- robot configuration 
-		- tf Frame id 
-		odom -> base_footprint -> base_link ->[base_scan, imu_base]
 
-		- baseController subscribe topic : /cmd_vel
-	-->
-
-	<arg name ="imu_port" default="/dev/ttyACM1"/>
 	<arg name ="motor_port" default="/dev/ttyACM0"/>
-
-
-    <!-- this section static tf -->
-    <!-- <node pkg="tf" type="static_transform_publisher" name="link1_broadcaster" args="0 0 0.1 0 0 0 1 base_footprint base_link 10" />
-    <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser4"
-    args="0.0 0.0 0.115 0 0 0 1 base_link base_scan 10" />
-    <node pkg="tf" type="static_transform_publisher" name="base_link_to_imu"
-    args="-0.08 0.08 0.1 0.0 0.0 0.0 1 base_link imu_base 10" /> -->
-
-    <!-- <node pkg="tf" type="static_transform_publisher" name="base_link_to_camera"
-    args="0.0 0.0 0.15 0.0 0.0 0.0 1 base_link camera 10" /> -->
-
-	<!-- imu node--> 
-    <!-- <node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" >
-    <param name="port" value="$(arg imu_port)"/>
-    </node> -->
+	<arg name ="imu_port" default="/dev/ttyUSB1"/>
 
 	<!--rosserial node for motor on Arduino-->  
      <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
      <param name="port" value="$(arg motor_port)"/>
+
      </node>
      <!-- motor node -->
      <node pkg="motor_ctrl" type="motor_ctrl_node" name="motor_ctrl_node"/>
 
-    <!-- odom node-->
-    <!-- realise comment if u wanna use only wheel odometry-->
-    <node pkg="slam" type="odom_node" name="link0_broadcaster" />
-    <!--<node pkg="marvel_slam" type="imu_wheel_odom_node" name="imu_wheel_odom_node" />-->
+     <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher" output="screen">
+     <param name="port" value="/dev/ttyUSB0"/>
+     <param name="frame_id" value="lidar_link"/>
+     </node>
 
-    <!-- lidar node --> 
-
-<launch>
-  <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher" output="screen">
-    <param name="port" value="/dev/ttyUSB0"/>
-    <param name="frame_id" value="laser"/>
-  </node>
-</launch>
+	 <node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="true">
+	 <param name="port" value="$(arg imu_port)"/>
+	 </node>
 
 
-  <!--
-<arg name ="cam_port" default="/dev/video2"/>
-
-    <group ns="camera">
-        <node pkg="usb_cam" type="usb_cam_node" name="usb_cam_node" output="log">
-            
-            <param name="video_device" value="$(arg cam_port)"/>
-            <param name="image_width" value="640"/> 
-            <param name="image_height" value="480"/> 
-            <param name="camera_frame_id" value="camera"/>
-            <param name="framerate" value="30"/>
-            <param name="camera_name" value="camera"/>
-            <param name="frame_id" type="string" value="$(arg cam_frame_id)"/>
-        </node>
-
-        
-    </group>
--->
-  <!-- <arg name="launch_prefix" default="" />  -->
-  <!-- set to value="gdbserver localhost:10000" for remote debugging -->
-  <!-- <arg name="node_namespace" default="apriltag_ros_continuous_node" />
-  <arg name="camera_name" default="/camera_rect" />
-  <arg name="camera_frame" default="camera" />
-  <arg name="image_topic" default="image_rect" /> -->
-
-  <!-- Set parameters -->
-  <!-- <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="$(arg node_namespace)" />
-  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="$(arg node_namespace)" />
-  
-  <node pkg="apriltag_ros" type="apriltag_ros_continuous_node" name="$(arg node_namespace)" clear_params="true" output="screen" launch-prefix="$(arg launch_prefix)" > -->
-    <!-- Remap topics from those used in code to those on the ROS network -->
-    <!-- <remap from="image_rect" to="$(arg camera_name)/$(arg image_topic)" />
-    <remap from="camera_info" to="$(arg camera_name)/camera_info" /> -->
-
-    <!-- <param name="camera_frame" type="str" value="$(arg camera_frame)" />
-    <param name="publish_tag_detections_image" type="bool" value="true" />       -->
-    <!-- default: false -->
-
-<!-- 
-    <remap from="/camera_rect/image_rect" to ="/camera/usb_cam_node/image_raw"/>
-    <remap from="/camera_rect/camera_info" to="/camera/usb_cam_node/camera_info"/>
-  </node>
-
-  <node pkg="image_view" type="image_view" name="image_view" args="image:=/tag_detections_image"/> -->
 </launch>
