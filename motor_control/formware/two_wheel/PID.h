@@ -229,8 +229,8 @@ void M2doMotor(bool dir, long vel){
 void T5ISR(){
   t5_flag = true; // dir 토글
   //RPM();
-  M1vel_PID(speed_1);
-  M2vel_PID(speed_2);   
+  M2vel_PID(speed_1);
+  M1vel_PID(speed_2);   
 }
 
 

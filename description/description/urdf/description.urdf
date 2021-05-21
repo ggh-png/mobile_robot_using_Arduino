@@ -4,6 +4,16 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
   name="description">
+
+ <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0" rpy="0 0 -1.57"/>
+  </joint>
+
+
   <link
     name="base_link">
     <inertial>
@@ -195,7 +205,7 @@
     type="fixed">
     <origin
       xyz="0.0042092 0.080995 0.1732"
-      rpy="3.1416 0 0" />
+      rpy="0 -3.14 1.57" />
     <parent
       link="base_link" />
     <child
