@@ -52,7 +52,7 @@ int main(int argc, char **argv){
 
             x += delta_x;
             y += delta_y;
-            th += delta_th;
+            th -= delta_th;
 
             geometry_msgs::TransformStamped transformStamped; 
 

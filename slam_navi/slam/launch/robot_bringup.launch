@@ -12,12 +12,16 @@
 <!-- 
    <node pkg="motor_ctrl" type="motor_ctrl_node" name="motor_ctrl_node"/>
  -->
-    <node pkg="slam" type="odom_node" name="odom_node" />
-
-<!--    <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher" output="screen">
-    <param name="port" value="/dev/ttyUSB0"/>
-    <param name="frame_id" value="lidar_link"/>
-  </node> -->
-  
-
+<!-- 
+    <node pkg="slam" type="imu_wheel_odom_node" name="odom_node" /> -->
 </launch>
+
+
+
+
+
+
+
+
+
+

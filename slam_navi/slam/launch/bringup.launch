@@ -2,6 +2,7 @@
 
 	<arg name ="motor_port" default="/dev/ttyACM0"/>
 	<arg name ="imu_port" default="/dev/ttyUSB1"/>
+     <arg name ="lidar_port" default="/dev/ttyUSB0"/>
 
 	<!--rosserial node for motor on Arduino-->  
      <node pkg="rosserial_python" type="serial_node.py" name="serial_node">
@@ -12,13 +13,13 @@
      <node pkg="motor_ctrl" type="motor_ctrl_node" name="motor_ctrl_node"/>
 
      <node pkg="hls_lfcd_lds_driver" type="hlds_laser_publisher" name="hlds_laser_publisher" output="screen">
-     <param name="port" value="/dev/ttyUSB0"/>
+     <param name="port" value="$(arg lidar_port)"/>
      <param name="frame_id" value="lidar_link"/>
      </node>
 
 	 <node pkg="mpu6050_serial_to_imu" type="mpu6050_serial_to_imu_node" name="mpu6050_serial_to_imu_node" required="true">
 	 <param name="port" value="$(arg imu_port)"/>
 	 </node>
-
+     <node pkg="slam" type="imu_wheel_odom_node" name="imu_wheel_odom_node" />
 
 </launch>
