@@ -1,9 +1,15 @@
 <launch>
-  <!-- Arguments -->
-  <arg name="scan_topic"     default="scan"/>
+
+  <node pkg="laser_filters" type="scan_to_scan_filter_chain" name="laser_filter" output="screen">
+    <rosparam command="load" file="$(find slam)/config/scan_data_filter.yaml" />
+  </node>
+
+    <!-- Arguments -->
+  <arg name="scan_topic"     default="scan_filtered"/>
   <arg name="initial_pose_x" default="0.0"/>
   <arg name="initial_pose_y" default="0.0"/>
   <arg name="initial_pose_a" default="0.0"/>
+
 
   <!-- AMCL -->
   <node pkg="amcl" type="amcl" name="amcl">
