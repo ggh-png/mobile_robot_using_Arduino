@@ -205,7 +205,7 @@
     name="lidar_joint"
     type="fixed">
     <origin
-      xyz="0.0042092 0.080995 0.1732"
+      xyz="0.0042092 0.080995 0.1932"
       rpy="3.14 -3.14 1.57" />
     <parent
       link="base_link" />
