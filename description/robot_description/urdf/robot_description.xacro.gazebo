@@ -1,54 +1,59 @@
-<?xml version="1.0" ?>
-<robot>
+<?xml version="1.0"?>
+<robot name="robot_description" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:arg name="laser_visual" default="true"/>
+
+
   <gazebo reference="base_link">
-    <material>Gazebo/Black</material>
-    <!-- <mu1>0.3</mu1>
-    <mu2>0.3</mu2> -->
-    <mu1>0.0</mu1>
-    <mu2>0.0</mu2>
-    <slip1>.0</slip1>
-		<slip2>.0</slip2>
-    <kp>1000000.0</kp>
-    <kd>100.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>1.0</maxVel>
+    <material>Gazebo/DarkGrey</material>
 
+    <mu1>.0</mu1>
+    <mu2>.0</mu2>
   </gazebo>
+
   <gazebo reference="wheel_L_link">
-    <mu1>0.9</mu1>
-    <mu2>0.9</mu2>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <fdir1>1 0 0</fdir1>
+
   </gazebo>
+
   <gazebo reference="wheel_R_link">
-    <mu1>0.9</mu1>
-    <mu2>0.9</mu2>
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    
+    <fdir1>1 0 0</fdir1>
+
   </gazebo>
 
-  
 
-  
- 
+
+
   <gazebo>
-    <plugin filename="libgazebo_ros_diff_drive.so" name="differential_drive_controller">
-      <legacyMode>false</legacyMode>
-      <alwaysOn>true</alwaysOn>
-      <updateRate>20</updateRate>
-      <leftJoint>wheel_R_joint</leftJoint>
-      <rightJoint>wheel_L_joint</rightJoint>
-      <wheelSeparation>0.411</wheelSeparation>
-      <wheelDiameter>0.08</wheelDiameter>
-      <torque>20</torque>
+    <plugin name="turtlebot3_burger_controller" filename="libgazebo_ros_diff_drive.so">
       <commandTopic>cmd_vel</commandTopic>
-      <odometryTopic>wheel/odom</odometryTopic>
+      <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>base_footprint</robotBaseFrame>
-      <rosDebugLevel>ns</rosDebugLevel>
-      <publishWheelTF>false</publishWheelTF>
+      <odometrySource>world</odometrySource>
       <publishOdomTF>true</publishOdomTF>
-      <publishWheelJointState>false</publishWheelJointState>
-      <wheelAcceleration>0</wheelAcceleration>
-      <wheelTorque>5</wheelTorque>
-      <odometrySource>1</odometrySource>
-      <publishTf>1</publishTf>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <publishWheelTF>false</publishWheelTF>
+      <publishTf>true</publishTf>
+      <publishWheelJointState>true</publishWheelJointState>
+      <legacyMode>false</legacyMode>
+      <updateRate>30</updateRate>
+      <leftJoint>wheel_L_joint</leftJoint>
+      <rightJoint>wheel_R_joint</rightJoint>
+      <wheelSeparation>0.160</wheelSeparation>
+      <wheelDiameter>0.066</wheelDiameter>
+      <wheelAcceleration>1</wheelAcceleration>
+      <wheelTorque>10</wheelTorque>
+      <rosDebugLevel>na</rosDebugLevel>
     </plugin>
   </gazebo>
 
@@ -57,7 +62,7 @@
     <material>Gazebo/FlatBlack</material>
     <sensor type="ray" name="lds_lfcd_sensor">
       <pose>0 0 0 0 0 0</pose>
-      <visualize>true</visualize>
+      <visualize>$(arg laser_visual)</visualize>
       <update_rate>5</update_rate>
       <ray>
         <scan>

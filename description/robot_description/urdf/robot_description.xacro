@@ -7,6 +7,13 @@
   <xacro:include filename="$(find robot_description)/urdf/material.xacro" />
   <xacro:include filename="$(find robot_description)/urdf/robot_description.xacro.gazebo" />
 
+ <link name="base_footprint"/>
+
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0.0 0.0 0" rpy="0 0 0"/>
+  </joint>
 
   <link
     name="base_link">

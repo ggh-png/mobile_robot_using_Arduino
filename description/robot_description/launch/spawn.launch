@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <launch>
-    <param name="robot_description" command="$(find xacro)/xacro $(find robot_description)/urdf/robot_description.xacro"/>
+    <param name="robot_description" command="$(find urdf)/urdf $(find robot_description)/urdf/robot_description.urdf"/>
     
 
     <arg name="world_name" default="$(find robot_description)/worlds/robot_house.world"/>
