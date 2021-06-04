@@ -320,4 +320,15 @@
     <axis
       xyz="1 0 0" />
   </joint>
+
+
+ <link name="usb_cam"/>
+
+  <joint name="cam_joint" type="fixed">
+    <parent link="lidar_link"/>
+    <child link="usb_cam"/>
+    <origin xyz="0.0 0.0 0" rpy="0 0 0"/>
+  </joint>
+
+
 </robot>
