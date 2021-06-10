@@ -29,7 +29,6 @@
   </node> -->
 
 
-
   <node
     name="rviz"
     pkg="rviz"

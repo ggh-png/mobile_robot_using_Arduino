@@ -1,5 +1,5 @@
  <launch>
-	<include file = "$(find description_Final)/launch/display.launch"/>
+	<include file = "$(find description)/launch/display.launch"/>
 </launch>
 
 
