@@ -33,11 +33,17 @@
   <node name="rviz" pkg="rviz" type="rviz" args="-d $(find navigation)/rviz/rviz_navigation.rviz"/>
  -->
 
-  <node
+<!--   <node
     name="rviz"
     pkg="rviz"
     type="rviz"
     args="-d $(find navigation)/rviz/turtlebot3_navigation.rviz" />
+ -->
 
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+    args="-d $(find navigation)/rviz/rviz_navigation.rviz" />
 
 </launch>
