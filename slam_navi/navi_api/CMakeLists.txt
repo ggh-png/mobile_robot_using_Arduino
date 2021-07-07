@@ -110,7 +110,7 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-add_executable(send_goal src/send_robot_goal.cpp)
+# add_executable(send_goal src/send_robot_goal.cpp)
 add_executable(send_goal src/send_robot_goal_test.cpp)
 
 ## Add cmake target dependencies of the executable/library

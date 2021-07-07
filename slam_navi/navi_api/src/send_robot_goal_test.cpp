@@ -8,10 +8,10 @@
 typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
 
 
-double wayPoint[][3] = {
-	{1, 0, 1}, //way1
-	{3, 3, 1},	//way2
-	{3, 4, 1}	//way3
+double wayPoint[3][3] = {
+	{0, -2, 1}, //way1
+	{1, -2.5, 1},	//way2
+	{0, 0, 1}	//way3
 };	
 
 
@@ -29,32 +29,34 @@ int main(int argc, char** argv){
 
 	goal.target_pose.header.frame_id = "map";
 	goal.target_pose.header.stamp = ros::Time::now();
-	try{
-		goal.target_pose.pose.position.x = wayPoint[i][j];
-		goal.target_pose.pose.position.y = wayPoint[i][j + 1];
-		goal.target_pose.pose.orientation.w = wayPoint[i][j + 2];
-	   }
-	catch(int e){
+
+	for(int i = 0; i < 3; i++){
+		try{
+			goal.target_pose.pose.position.x = wayPoint[i][0];
+			goal.target_pose.pose.position.y = wayPoint[i][1];
+			goal.target_pose.pose.orientation.w = wayPoint[i][2];
+		   }
+		catch(int e){
+
+			goal.target_pose.pose.position.x = 1.0;
+			goal.target_pose.pose.position.y = 1.0;
+			goal.target_pose.pose.orientation.w = 1.0;
+
+		}
 
 
-		goal.target_pose.pose.position.x = 1.0;
-		goal.target_pose.pose.position.y = 1.0;
-		goal.target_pose.pose.orientation.w = 1.0;
 
+		ROS_INFO("Sending move base goal");
+		ac.sendGoal(goal);
 
-	}
+		ac.waitForResult();
 
+		// if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+		// 	ROS_INFO("Robot has arrived to the goal position");
+		// else{
+		// 	ROS_INFO("The base failed for some reason");
+		// }
 
-
-	ROS_INFO("Sending move base goal");
-	ac.sendGoal(goal);
-
-	ac.waitForResult();
-
-	if(ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
-		ROS_INFO("Robot has arrived to the goal position");
-	else{
-		ROS_INFO("The base failed for some reason");
 	}
 	return 0;
 }
