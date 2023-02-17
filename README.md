@@ -1,7 +1,7 @@
 # **Mobile Robot using Arduino and Raspberry Pi**
 
 
-![ezgif.com-gif-maker.gif](ezgif.com-video-to-gif (3).gif)
+![ezgif.com-gif-maker.gif](moving.gif)
 
 This repository contains code for a self-driving mobile robot built using ROS, Arduino, and Raspberry Pi. The robot's body was created using a 3D printer, and it uses an Arduino Mega, a Raspberry Pi 4, and DC encoder motors. The software runs on Raspbian, and the SLAM package used is GMapping, while the Navi package uses teb_local_planner and dwa_local_planner. The robot has a camera attached, allowing you to see what it sees.
 
