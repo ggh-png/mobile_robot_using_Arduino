@@ -35,7 +35,3 @@ The following packages are required to run this project:
 
 
 [![Video Label](1.png)](https://www.youtube.com/watch?v=n-BzgKhvjr0)
-
-
-
-[2021.06.29 teb_local_planner](https://www.youtube.com/watch?v=n-BzgKhvjr0)
